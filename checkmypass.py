@@ -1,6 +1,8 @@
 import requests
 import hashlib
 import sys
+from os import path
+import file_analyzer
 
 
 def request_api_data(query_char):
@@ -49,5 +51,8 @@ if __name__ == "__main__":
     passwords_list = sys.argv[1:]
     if len(passwords_list) == 0:
         passwords_list.append(input("Enter a password to check: "))
+    elif len(passwords_list) == 1:
+        if path.exists(passwords_list[0]):
+            passwords_list = file_analyzer.google_csv(passwords_list[0])
     exit = main(passwords_list)
     sys.exit(exit)

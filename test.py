@@ -1,8 +1,9 @@
 import unittest
 import checkmypass
+import file_analyzer
 
 
-class TestMain(unittest.TestCase):
+class TestPassCheck(unittest.TestCase):
     def test_request_api_data_ok(self):
         query_char = 'CBFDA'
         result = checkmypass.request_api_data(query_char)
@@ -22,10 +23,16 @@ class TestMain(unittest.TestCase):
 
     def test_pwned_api_check(self):
         string = 'abcdef123'
-        res = checkmypass.pwned_api_check(string)
+        checkmypass.pwned_api_check(string)
 
     def test_main(self):
         checkmypass.main(['password'])
+
+
+class TestFileAnalyzer(unittest.TestCase):
+    def test_google(self):
+        for password in file_analyzer.google_csv('D:/Downloads/Google Passwords.csv'):
+            print(password)
 
 
 if __name__ == "__main__":
