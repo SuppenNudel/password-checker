@@ -34,8 +34,8 @@ def pwned_api_check(password):
     return count
 
 
-def main(args):
-    for password in args:
+def main(passwords_list):
+    for password in passwords_list:
         count = pwned_api_check(password)
         if count:
             print(
@@ -46,4 +46,8 @@ def main(args):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    passwords_list = sys.argv[1:]
+    if len(passwords_list) == 0:
+        passwords_list.append(input("Enter a password to check: "))
+    exit = main(passwords_list)
+    sys.exit(exit)
